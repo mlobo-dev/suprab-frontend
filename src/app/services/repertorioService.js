@@ -1,9 +1,9 @@
 import ApiService from '../apiservice'
 import ErroValidacao from '../exceptions/ErroValidacao'
 class RepertorioService extends ApiService {
-    constructor() {
-        super('/repertorios')
-    }
+    // constructor() {
+    //     super('/')
+    // }
 
 
 
@@ -12,7 +12,7 @@ class RepertorioService extends ApiService {
     }
 
     listar() {
-        return this.get('/')
+        return this.get('/v1/funcionarios')
     }
 
     buscarPeloId(id) {

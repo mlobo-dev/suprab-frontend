@@ -22,8 +22,8 @@ class Home extends React.Component {
     }
 
     async componentDidMount() {
-        this.data = await this.service.listar()
-            .then(response => this.setState({ repertorios: response.data }));
+        this.data = await this.service.listar();
+            // .then(response => this.setState({ repertorios: response.data }));
         debugger;
     }
 
@@ -84,7 +84,7 @@ class Home extends React.Component {
                 <RepertorioTable
                     repertorios={this.state.repertorios}
                     deleteAction={this.abrirConfirmacao}
-                    data={this.data}
+                    data={this.data.data}
                 >
                 </RepertorioTable>
                 <div>
