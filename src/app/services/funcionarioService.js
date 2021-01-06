@@ -9,6 +9,10 @@ class FuncionarioService extends ApiService {
     return this.post('/', funcionario);
   }
 
+  editar(funcionario) {
+    return this.put('/', funcionario);
+  }
+
   listar() {
     return this.get('/v1/membros');
   }

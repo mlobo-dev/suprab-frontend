@@ -71,7 +71,7 @@ class CadastroFuncionario extends React.Component {
       uf,
       cargo,
       tituloHonorifico,
-      corposFilosoficos: listCorpoFilosofico,
+      corposFilosoficos,
     } = this.state;
 
     const membro = {
@@ -85,7 +85,7 @@ class CadastroFuncionario extends React.Component {
       uf,
       cargo,
       tituloHonorifico,
-      corposFilosoficos: listCorpoFilosofico,
+      corposFilosoficos,
     };
 
     this.service
@@ -112,7 +112,7 @@ class CadastroFuncionario extends React.Component {
       uf,
       cargo,
       tituloHonorifico,
-      corposFilosoficos: listCorpoFilosofico,
+      corposFilosoficos,
     } = this.state;
 
     const membro = {
@@ -127,11 +127,11 @@ class CadastroFuncionario extends React.Component {
       uf,
       cargo,
       tituloHonorifico,
-      corposFilosoficos: listCorpoFilosofico,
+      corposFilosoficos,
     };
 
     this.service
-      .salvar(membro)
+      .editar(membro)
       .then((response) => {
         this.props.history.push('/funcionarios');
         mensagemSucesso('Salvo com Sucesso!');
