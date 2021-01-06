@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Card from '../../components/card';
 import FormGroup from '../../components/form-group';
-import { withRouter } from 'react-router-dom';
+import { withRouter, useParams } from 'react-router-dom';
 import UsuarioService from '../../app/services/usuarioService';
 import { mensagemErro, mensagemSucesso } from '../../components/toastr';
 import SelectMenu from '../../components/select-menu';
@@ -12,30 +12,34 @@ import './funcionario.css';
 class CadastroFuncionario extends React.Component {
   state = {
     id: 0,
-    status: '',
-    cgp: '',
-    cpf: '',
-    nome: '',
-    dataNascimento: '',
-    cidade: '',
-    uf: '',
-    cargo: '',
-    tituloHonorifico: '',
+    status: 'ATIVO',
+    cgp: 'asdasd',
+    cep: '73752178',
+    cpf: '04442584184',
+    nome: 'Vahn',
+    dataNascimento: '2020-01-12',
+    cidade: 'Planaltina',
+    uf: 'GO',
+    cargo: 'Consultor',
+    tituloHonorifico: 'titulo',
     listCorpoFilosofico: [
       {
-        grau: '',
-        dataGrau: '',
-        corpoFilosofico: '',
+        grau: '33',
+        dataGrau: '2020-01-12',
+        corpo: 'corpixho',
       },
     ],
   };
 
-  constructor() {
+  constructor(props) {
     super();
+    console.log(props);
     this.usuarioService = new UsuarioService();
     this.itemService = new ItemService();
     this.service = new FuncionarioService();
   }
+
+  componentDidMount() {}
 
   cadastrar = () => {
     // const usuarioLogado = LocalStorageService.obterItem('_usuario_logado')
@@ -43,6 +47,7 @@ class CadastroFuncionario extends React.Component {
       status,
       cgp,
       cpf,
+      cep,
       nome,
       dataNascimento,
       cidade,
@@ -52,23 +57,24 @@ class CadastroFuncionario extends React.Component {
       listCorpoFilosofico,
     } = this.state;
 
-    const repertorio = {
+    const membro = {
       status,
       cgp,
       cpf,
+      cep,
       nome,
       dataNascimento,
       cidade,
       uf,
       cargo,
       tituloHonorifico,
-      listCorpoFilosofico,
+      corposFilosoficos: listCorpoFilosofico,
     };
 
-    console.log(listCorpoFilosofico)
+    console.log(listCorpoFilosofico);
 
     this.service
-      .salvar(repertorio)
+      .salvar(membro)
       .then((response) => {
         this.props.history.push('/funcionarios');
         mensagemSucesso('Salvo com Sucesso!');
@@ -103,8 +109,8 @@ class CadastroFuncionario extends React.Component {
     let corposFilosoficos = this.state.listCorpoFilosofico;
 
     switch (attribute) {
-      case 'corpoFilosofico':
-        corposFilosoficos[index].corpoFilosofico = value;
+      case 'corpo':
+        corposFilosoficos[index].corpo = value;
         break;
       case 'grau':
         corposFilosoficos[index].grau = value;
@@ -141,16 +147,16 @@ class CadastroFuncionario extends React.Component {
             >
               <input
                 type="text"
-                value={this.state.listCorpoFilosofico[index].corpoFilosofico}
+                value={this.state.listCorpoFilosofico[index].corpo}
                 onChange={(e) =>
                   this.handleCorpoFilosoficoChange(
                     e.target.value,
                     e.target.id,
-                    'corpoFilosofico'
+                    'corpo'
                   )
                 }
                 className="form-control"
-                name={this.state.listCorpoFilosofico[index].corpoFilosofico}
+                name={this.state.listCorpoFilosofico[index].corpo}
                 id={index}
                 aria-describedby="corpoHelp"
                 placeholder="Informe o corpo filosofico"
@@ -337,7 +343,22 @@ class CadastroFuncionario extends React.Component {
             </FormGroup>
           </div>
 
-          <div className="col-lg-6">
+          <div className="col-lg-2">
+            <FormGroup label="CEP: *" htmlFor="inputCEP">
+              <input
+                type="text"
+                value={this.state.cep}
+                onChange={this.handleChange}
+                className="form-control"
+                name="cep"
+                id="inputCEP"
+                aria-describedby="tituloHelp"
+                placeholder="Informe o cep"
+              />
+            </FormGroup>
+          </div>
+
+          <div className="col-lg-4">
             <FormGroup label="Cargo: *" htmlFor="inputCargo">
               <input
                 type="text"

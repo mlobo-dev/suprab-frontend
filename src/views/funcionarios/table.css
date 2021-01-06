@@ -1,0 +1,9 @@
+.action-itens {
+  display: flex;
+  justify-content: space-around;
+}
+
+.icon {
+  color: black;
+  text-decoration: none;
+}

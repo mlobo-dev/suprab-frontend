@@ -1,30 +1,28 @@
-import ApiService from '../apiservice'
-import ErroValidacao from '../exceptions/ErroValidacao'
+import ApiService from '../apiservice';
+import ErroValidacao from '../exceptions/ErroValidacao';
 class FuncionarioService extends ApiService {
-    constructor() {
-        super('/v1/membros')
+  constructor() {
+    super('/v1/membros');
+  }
+
+  salvar(funcionario) {
+    return this.post('/', funcionario);
+  }
+
+  listar() {
+    return this.get('/v1/membros');
+  }
+
+  validar(funcionario) {
+    const erros = [];
+
+    if (!funcionario.nome) {
+      erros.push('O campo nome é obrigatório');
     }
 
-
-    salvar(funcionario) {
-        return this.post('/', funcionario)
+    if (erros && erros.length > 0) {
+      throw new ErroValidacao(erros);
     }
-
-    listar() {
-        return this.get('/')
-    }
-
-    validar(funcionario) {
-        const erros = []
-
-        if (!funcionario.nome) {
-            erros.push('O campo nome é obrigatório')
-        }
-
-        if (erros && erros.length > 0) {
-            throw new ErroValidacao(erros)
-        }
-    }
-
+  }
 }
 export default FuncionarioService;
