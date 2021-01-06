@@ -10,7 +10,8 @@ class Home extends React.Component {
   state = {
     membros: [],
     showConfirmDialog: false,
-    idMembro: 1,
+    idMembro: 0,
+    membro: {},
     data: [],
   };
 
@@ -27,16 +28,12 @@ class Home extends React.Component {
 
   deletar = async () => {
     this.service
-      .deletar(this.state.idMembro.id)
-      .then((response) => {
-        const repertorios = this.state.membros;
-        const index = repertorios.findIndex(
-          (r) => r.id === this.state.idMembro.id
-        );
-
-        repertorios.splice(index, 1);
-        this.setState({ repertorios: repertorios, showConfirmDialog: false });
-
+      .deletarPeloId(this.state.membro.id)
+      .then(() => {
+        const membros = this.state.membros;
+        const index = membros.findIndex((r) => r.id === this.state.membro.id);
+        membros.splice(index, 1);
+        this.setState({ membros: membros, showConfirmDialog: false });
         mensagemSucesso('Deletado com sucesso!');
       })
       .catch((error) => {
@@ -44,22 +41,23 @@ class Home extends React.Component {
       });
   };
 
-  abrirConfirmacao = async (repertorio) => {
-    this.setState({
-      showConfirmDialog: true,
-      repertorioDeletar: await (await this.service.buscarPeloId(repertorio))
-        .data,
-    });
+  abrirConfirmacao = (membro) => {
+    this.setState({ showConfirmDialog: true, membro: membro });
   };
 
   cancelarDelecao = () => {
-    this.setState({ showConfirmDialog: false, repertorioDeletar: [] });
+    this.setState({ showConfirmDialog: false, membro: {} });
   };
 
   render() {
     const confirmDialogFooter = (
       <div>
-        <Button label="Sim" icon="pi pi-check" onClick={this.deletar} />
+        <Button
+          label="Sim"
+          icon="pi pi-check"
+          className="p-button-danger"
+          onClick={this.deletar}
+        />
         <Button
           label="Cancelar"
           icon="pi pi-times"
@@ -88,21 +86,24 @@ class Home extends React.Component {
         {}
         <FuncionarioTable
           membros={this.state.membros}
-          deleteAction={this.abrirConfirmacao}
+          deletarAction={this.abrirConfirmacao}
           editarAction={this.editar}
           data={this.data}
         ></FuncionarioTable>
         <div>
           <Dialog
-            header="Deletar Repertório"
+            header="Deletar Membro"
             visible={this.state.showConfirmDialog}
-            style={{ width: '50vw' }}
+            style={{ width: '30vw' }}
             modal={true}
             footer={confirmDialogFooter}
             onHide={() => this.setState({ showConfirmDialog: false })}
           >
-            Confirma a exclusão desse repertório? essa ação não poderá ser
-            desfeita.
+            <p>
+              Confirma a exclusão do membro{' '}
+              <strong>{this.state.membro.nome}</strong> ? essa ação não poderá
+              ser desfeita.
+            </p>
           </Dialog>
         </div>
       </Card>

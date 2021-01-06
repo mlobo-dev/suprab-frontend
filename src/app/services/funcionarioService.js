@@ -17,6 +17,10 @@ class FuncionarioService extends ApiService {
     return this.get('/v1/membros');
   }
 
+  deletarPeloId(id) {
+    return this.delete(`/${id}`);
+  }
+
   buscarPeloId(id) {
     return this.get(`/v1/membros/${id}`);
   }
