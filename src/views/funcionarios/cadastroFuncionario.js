@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Card from '../../components/card';
+import Masks from '../../utils/masks';
 import FormGroup from '../../components/form-group';
 import { withRouter, useParams } from 'react-router-dom';
 import UsuarioService from '../../app/services/usuarioService';
@@ -47,7 +48,6 @@ class CadastroFuncionario extends React.Component {
   }
 
   buscarPeloId = (id) => {
-    debugger;
     this.service.buscarPeloId(id).then((response) => {
       this.setState(response.data);
       this.setState({
@@ -63,8 +63,6 @@ class CadastroFuncionario extends React.Component {
     const {
       status,
       cgp,
-      cpf,
-      cep,
       nome,
       dataNascimento,
       cidade,
@@ -77,8 +75,8 @@ class CadastroFuncionario extends React.Component {
     const membro = {
       status,
       cgp,
-      cpf,
-      cep,
+      cpf: Masks.cpfRemove(this.state.cpf),
+      cep: Masks.cepRemove(this.state.cep),
       nome,
       dataNascimento,
       cidade,
@@ -104,7 +102,6 @@ class CadastroFuncionario extends React.Component {
       id,
       status,
       cgp,
-      cpf,
       cep,
       nome,
       dataNascimento,
@@ -119,8 +116,8 @@ class CadastroFuncionario extends React.Component {
       id,
       status,
       cgp,
-      cpf,
-      cep,
+      cpf: Masks.cpfRemove(this.state.cpf),
+      cep: Masks.cepRemove(this.state.cep),
       nome,
       dataNascimento,
       cidade,
@@ -318,7 +315,7 @@ class CadastroFuncionario extends React.Component {
             <FormGroup label="CPF: *" htmlFor="inputCPF">
               <input
                 type="text"
-                value={this.state.cpf}
+                value={Masks.cpf(this.state.cpf)}
                 onChange={this.handleChange}
                 className="form-control"
                 name="cpf"
@@ -409,7 +406,7 @@ class CadastroFuncionario extends React.Component {
             <FormGroup label="CEP: *" htmlFor="inputCEP">
               <input
                 type="text"
-                value={this.state.cep}
+                value={Masks.cep(this.state.cep)}
                 onChange={this.handleChange}
                 className="form-control"
                 name="cep"
