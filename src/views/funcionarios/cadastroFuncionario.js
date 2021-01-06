@@ -22,6 +22,7 @@ class CadastroFuncionario extends React.Component {
     cidade: '',
     uf: '',
     cargo: '',
+    tipoSanguineo: '',
     tituloHonorifico: '',
     corposFilosoficos: [
       {
@@ -68,6 +69,7 @@ class CadastroFuncionario extends React.Component {
       cidade,
       uf,
       cargo,
+      tipoSanguineo,
       tituloHonorifico,
       corposFilosoficos,
     } = this.state;
@@ -82,6 +84,7 @@ class CadastroFuncionario extends React.Component {
       cidade,
       uf,
       cargo,
+      tipoSanguineo,
       tituloHonorifico,
       corposFilosoficos,
     };
@@ -106,6 +109,7 @@ class CadastroFuncionario extends React.Component {
       nome,
       dataNascimento,
       cidade,
+      tipoSanguineo,
       uf,
       cargo,
       tituloHonorifico,
@@ -121,6 +125,7 @@ class CadastroFuncionario extends React.Component {
       nome,
       dataNascimento,
       cidade,
+      tipoSanguineo,
       uf,
       cargo,
       tituloHonorifico,
@@ -357,7 +362,22 @@ class CadastroFuncionario extends React.Component {
             </FormGroup>
           </div>
 
-          <div className="col-lg-6">
+          <div className="col-lg-2">
+            <FormGroup label="Tipo Sanguíneo: *" htmlFor="inputSangue">
+              <input
+                type="text"
+                value={this.state.tipoSanguineo}
+                onChange={this.handleChange}
+                className="form-control"
+                name="tipoSanguineo"
+                id="inputSangue"
+                aria-describedby="tituloHelp"
+                placeholder="Informe o título"
+              />
+            </FormGroup>
+          </div>
+
+          <div className="col-lg-4">
             <FormGroup label="Título Honorífico: *" htmlFor="inputTitulo">
               <input
                 type="text"

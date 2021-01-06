@@ -8,6 +8,8 @@ import CadastroItem from '../views/musicas/cadastroItem';
 import { AuthConsumer } from './ProvedorAutenticacao';
 import CadastroRepetorio from '../views/repertorio/cadastroRepertorio';
 import Funcionario from '../views/funcionarios/funcionario';
+import Notificacao from '../views/notificacoes/notificacao';
+import CadastroNotificacao from '../views/notificacoes/cadastroNotificacao';
 import CadastroFuncionario from '../views/funcionarios/cadastroFuncionario';
 
 function RotaAutenticada({
@@ -71,6 +73,17 @@ function Rotas(props) {
           isUsuarioAutenticado={props.isUsuarioAutenticado}
           path="/editar-membro/:id?"
           component={CadastroFuncionario}
+        />
+        <RotaAutenticada
+          isUsuarioAutenticado={props.isUsuarioAutenticado}
+          path="/notificacoes"
+          component={Notificacao}
+        />
+
+        <RotaAutenticada
+          isUsuarioAutenticado={props.isUsuarioAutenticado}
+          path="/cadastro/notificacoes"
+          component={CadastroNotificacao}
         />
         <RotaAutenticada
           isUsuarioAutenticado={props.isUsuarioAutenticado}

@@ -1,30 +1,56 @@
-import React from 'react'
+import React from 'react';
 import NavbarItem from './nav-bar-item';
-import { AuthConsumer } from '../main/ProvedorAutenticacao'
+import { AuthConsumer } from '../main/ProvedorAutenticacao';
 
 function NavBar(props) {
   return (
     <div className="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
       <div className="container">
-        <a href="#/home" className="navbar-brand" >SUPRAB</a>
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <a href="#/home" className="navbar-brand">
+          SUPRAB
+        </a>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarResponsive">
           <ul className="navbar-nav">
-            <NavbarItem render={props.isUsuarioAutenticado} href="#/funcionarios" label="Membros" />
-            <NavbarItem render={props.isUsuarioAutenticado} href="#/funcionarios" label="Notificações" />
-            <NavbarItem render={props.isUsuarioAutenticado} onClick={props.deslogar} href="#/login" label="Sair" />
-
+            <NavbarItem
+              render={props.isUsuarioAutenticado}
+              href="#/funcionarios"
+              label="Membros"
+            />
+            <NavbarItem
+              render={props.isUsuarioAutenticado}
+              href="#/notificacoes"
+              label="Notificações"
+            />
+            <NavbarItem
+              render={props.isUsuarioAutenticado}
+              onClick={props.deslogar}
+              href="#/login"
+              label="Sair"
+            />
           </ul>
-
         </div>
       </div>
     </div>
-  )
+  );
 }
 export default () => (
   <AuthConsumer>
-    {(context) => (<NavBar isUsuarioAutenticado={context.isAutenticado} deslogar={context.encerrarSessao} />)}
+    {(context) => (
+      <NavBar
+        isUsuarioAutenticado={context.isAutenticado}
+        deslogar={context.encerrarSessao}
+      />
+    )}
   </AuthConsumer>
-)
+);
