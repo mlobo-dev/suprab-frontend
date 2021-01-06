@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 const httpClient = axios.create({
-  // baseURL: 'http://ec2-3-134-98-29.us-east-2.compute.amazonaws.com:8080/'
-  baseURL: 'http://localhost:8080/',
+  baseURL: 'http://ec2-18-189-157-67.us-east-2.compute.amazonaws.com:8080/',
 });
 
 class ApiService {
