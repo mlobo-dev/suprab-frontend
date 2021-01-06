@@ -69,7 +69,7 @@ function Rotas(props) {
         />
         <RotaAutenticada
           isUsuarioAutenticado={props.isUsuarioAutenticado}
-          path="/cadastro-funcionario/:id"
+          path="/editar-membro/:id?"
           component={CadastroFuncionario}
         />
         <RotaAutenticada

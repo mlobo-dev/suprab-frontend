@@ -12,21 +12,21 @@ import './funcionario.css';
 class CadastroFuncionario extends React.Component {
   state = {
     id: 0,
-    status: 'ATIVO',
-    cgp: 'asdasd',
-    cep: '73752178',
-    cpf: '04442584184',
-    nome: 'Vahn',
-    dataNascimento: '2020-01-12',
-    cidade: 'Planaltina',
-    uf: 'GO',
-    cargo: 'Consultor',
-    tituloHonorifico: 'titulo',
-    listCorpoFilosofico: [
+    status: '',
+    cgp: '',
+    cep: '',
+    cpf: '',
+    nome: '',
+    dataNascimento: '',
+    cidade: '',
+    uf: '',
+    cargo: '',
+    tituloHonorifico: '',
+    corposFilosoficos: [
       {
-        grau: '33',
-        dataGrau: '2020-01-12',
-        corpo: 'corpixho',
+        grau: '',
+        dataGrau: '',
+        corpo: '',
       },
     ],
   };
@@ -39,7 +39,24 @@ class CadastroFuncionario extends React.Component {
     this.service = new FuncionarioService();
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    const params = this.props.match.params;
+    if (params.id) {
+      this.buscarPeloId(params.id);
+    }
+  }
+
+  buscarPeloId = (id) => {
+    debugger;
+    this.service.buscarPeloId(id).then((response) => {
+      this.setState(response.data);
+      this.setState({
+        cep: response.data.endereco.cep,
+        cidade: response.data.endereco.cidade,
+        uf: response.data.endereco.uf,
+      });
+    });
+  };
 
   cadastrar = () => {
     // const usuarioLogado = LocalStorageService.obterItem('_usuario_logado')
@@ -54,7 +71,7 @@ class CadastroFuncionario extends React.Component {
       uf,
       cargo,
       tituloHonorifico,
-      listCorpoFilosofico,
+      corposFilosoficos: listCorpoFilosofico,
     } = this.state;
 
     const membro = {
@@ -71,7 +88,47 @@ class CadastroFuncionario extends React.Component {
       corposFilosoficos: listCorpoFilosofico,
     };
 
-    console.log(listCorpoFilosofico);
+    this.service
+      .salvar(membro)
+      .then((response) => {
+        this.props.history.push('/funcionarios');
+        mensagemSucesso('Salvo com Sucesso!');
+      })
+      .catch((error) => {
+        mensagemErro('Erro ao tentar salvar o Funcioário', error.response.data);
+      });
+  };
+
+  editar = () => {
+    const {
+      id,
+      status,
+      cgp,
+      cpf,
+      cep,
+      nome,
+      dataNascimento,
+      cidade,
+      uf,
+      cargo,
+      tituloHonorifico,
+      corposFilosoficos: listCorpoFilosofico,
+    } = this.state;
+
+    const membro = {
+      id,
+      status,
+      cgp,
+      cpf,
+      cep,
+      nome,
+      dataNascimento,
+      cidade,
+      uf,
+      cargo,
+      tituloHonorifico,
+      corposFilosoficos: listCorpoFilosofico,
+    };
 
     this.service
       .salvar(membro)
@@ -102,11 +159,11 @@ class CadastroFuncionario extends React.Component {
     const name = evento.target.name;
 
     this.setState({ [name]: value });
-    console.log(this.state.listCorpoFilosofico);
+    console.log(this.state.corposFilosoficos);
   };
 
   handleCorpoFilosoficoChange = (value, index, attribute) => {
-    let corposFilosoficos = this.state.listCorpoFilosofico;
+    let corposFilosoficos = this.state.corposFilosoficos;
 
     switch (attribute) {
       case 'corpo':
@@ -122,7 +179,12 @@ class CadastroFuncionario extends React.Component {
   };
 
   addCorpoFilosofico = () => {
-    const { grau, dataGrau, corpoFilosofico, listCorpoFilosofico } = this.state;
+    const {
+      grau,
+      dataGrau,
+      corpoFilosofico,
+      corposFilosoficos: listCorpoFilosofico,
+    } = this.state;
     const list = { grau, dataGrau, corpoFilosofico };
 
     listCorpoFilosofico.push(list);
@@ -131,7 +193,7 @@ class CadastroFuncionario extends React.Component {
   };
 
   renderizarCorposFilosoficos = () => {
-    let { listCorpoFilosofico } = this.state;
+    let { corposFilosoficos: listCorpoFilosofico } = this.state;
     let list = [];
     for (let index = 0; index < listCorpoFilosofico.length; index++) {
       list.push(
@@ -147,7 +209,7 @@ class CadastroFuncionario extends React.Component {
             >
               <input
                 type="text"
-                value={this.state.listCorpoFilosofico[index].corpo}
+                value={this.state.corposFilosoficos[index].corpo}
                 onChange={(e) =>
                   this.handleCorpoFilosoficoChange(
                     e.target.value,
@@ -156,7 +218,7 @@ class CadastroFuncionario extends React.Component {
                   )
                 }
                 className="form-control"
-                name={this.state.listCorpoFilosofico[index].corpo}
+                name={this.state.corposFilosoficos[index].corpo}
                 id={index}
                 aria-describedby="corpoHelp"
                 placeholder="Informe o corpo filosofico"
@@ -171,7 +233,7 @@ class CadastroFuncionario extends React.Component {
             >
               <input
                 type="text"
-                value={this.state.listCorpoFilosofico[index].grau}
+                value={this.state.corposFilosoficos[index].grau}
                 onChange={(e) =>
                   this.handleCorpoFilosoficoChange(
                     e.target.value,
@@ -180,7 +242,7 @@ class CadastroFuncionario extends React.Component {
                   )
                 }
                 className="form-control"
-                name={this.state.listCorpoFilosofico[index].grau}
+                name={this.state.corposFilosoficos[index].grau}
                 id={index}
                 aria-describedby="grauHelp"
                 placeholder="Informe o grau"
@@ -195,7 +257,7 @@ class CadastroFuncionario extends React.Component {
             >
               <input
                 type="date"
-                value={this.state.listCorpoFilosofico[index].dataGrau}
+                value={this.state.corposFilosoficos[index].dataGrau}
                 onChange={(e) =>
                   this.handleCorpoFilosoficoChange(
                     e.target.value,
@@ -204,7 +266,7 @@ class CadastroFuncionario extends React.Component {
                   )
                 }
                 className="form-control"
-                name={this.state.listCorpoFilosofico[index].dataGrau}
+                name={this.state.corposFilosoficos[index].dataGrau}
                 id={index}
                 aria-describedby="dataGrauHelp"
                 placeholder="Informe a data do grau"
@@ -387,7 +449,10 @@ class CadastroFuncionario extends React.Component {
         <br />
         <div className="row">
           <div className="col-lg-12">
-            <button onClick={this.cadastrar} className="btn btn-success">
+            <button
+              onClick={this.state.id > 0 ? this.editar : this.cadastrar}
+              className="btn btn-success"
+            >
               <i className="pi pi-save"></i> Salvar
             </button>
             <button onClick={this.cancelar} className="btn btn-danger">

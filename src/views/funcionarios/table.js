@@ -43,14 +43,14 @@ export default (props) => {
         </tr>
       </thead>
       <tbody>
-        {props.membros.map((value) => (
+        {props.membros.map((membro) => (
           <tr>
-            <td>{value.nome}</td>
-            <td>{value.cargo}</td>
-            <td>{value.tituloHonorifico}</td>
+            <td>{membro.nome}</td>
+            <td>{membro.cargo}</td>
+            <td>{membro.tituloHonorifico}</td>
             <td>
               <div className="action-itens">
-                <Link to={`/cadastro-funcionario/`} className="icon">
+                <Link to={`/editar-membro/${membro.id}`} className="icon">
                   <i class="pi pi-pencil"></i>
                 </Link>
                 <Link className="icon">

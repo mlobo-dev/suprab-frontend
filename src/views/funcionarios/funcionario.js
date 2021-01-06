@@ -10,7 +10,7 @@ class Home extends React.Component {
   state = {
     membros: [],
     showConfirmDialog: false,
-    membroDeletarId: [],
+    idMembro: 1,
     data: [],
   };
 
@@ -27,11 +27,11 @@ class Home extends React.Component {
 
   deletar = async () => {
     this.service
-      .deletar(this.state.membroDeletarId.id)
+      .deletar(this.state.idMembro.id)
       .then((response) => {
         const repertorios = this.state.membros;
         const index = repertorios.findIndex(
-          (r) => r.id === this.state.membroDeletarId.id
+          (r) => r.id === this.state.idMembro.id
         );
 
         repertorios.splice(index, 1);
@@ -89,6 +89,7 @@ class Home extends React.Component {
         <FuncionarioTable
           membros={this.state.membros}
           deleteAction={this.abrirConfirmacao}
+          editarAction={this.editar}
           data={this.data}
         ></FuncionarioTable>
         <div>

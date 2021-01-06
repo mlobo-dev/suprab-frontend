@@ -13,6 +13,10 @@ class FuncionarioService extends ApiService {
     return this.get('/v1/membros');
   }
 
+  buscarPeloId(id) {
+    return this.get(`/v1/membros/${id}`);
+  }
+
   validar(funcionario) {
     const erros = [];
 
