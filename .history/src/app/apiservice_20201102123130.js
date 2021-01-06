@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const httpClient = axios.create({
-  baseURL: 'http://ec2-3-134-98-29.us-east-2.compute.amazonaws.com:8080/'
+  baseURL: 'http://localhost:8080'
 })
 
 class ApiService {
@@ -27,7 +27,7 @@ class ApiService {
 
   get(url) {
     debugger;
-    const requestUrl = `${url}`
+    const requestUrl = `${this.apiurl}${url}`
     return httpClient.get(requestUrl)
   }
 }

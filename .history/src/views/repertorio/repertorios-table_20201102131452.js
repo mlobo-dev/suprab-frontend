@@ -1,6 +1,6 @@
 import React from 'react';
 export default props => {
-
+    debugger;
     const rows = props.repertorios.map(repertorio => {
         return (
             <tr key={repertorio.id}>
@@ -32,9 +32,9 @@ export default props => {
         <table className="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col">Nome Completo</th>
-                    <th scope="col">Cargo</th>
+                    <th scope="col">Nome</th>
                     <th scope="col">Titulo  Honorifico</th>
+                    <th scope="col">Cargo</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>

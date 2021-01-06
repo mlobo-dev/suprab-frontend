@@ -2,7 +2,7 @@ import ApiService from '../apiservice'
 import ErroValidacao from '../exceptions/ErroValidacao'
 class FuncionarioService extends ApiService {
     constructor() {
-        super('/v1/funcionarios')
+        super('/v1/membros')
     }
 
 

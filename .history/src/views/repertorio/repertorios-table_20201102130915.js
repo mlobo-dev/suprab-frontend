@@ -32,21 +32,18 @@ export default props => {
         <table className="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col">Nome Completo</th>
-                    <th scope="col">Cargo</th>
-                    <th scope="col">Titulo  Honorifico</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Data Ministração</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
-            <tbody>
-                {props.repertorios.map((value) => (
+            {/* <tbody>
+                {props.data.map((value) => (
                     <tr>
-                        <td>{value.nome}</td>
-                        <td>{value.cargo}</td>
-                        <td>{value.tituloHonorifico}</td>
+                        <td>value.nome</td>
                     </tr>
                 ))}
-            </tbody>
+            </tbody> */}
         </table>
     )
 }

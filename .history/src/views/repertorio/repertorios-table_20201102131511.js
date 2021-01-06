@@ -1,6 +1,6 @@
 import React from 'react';
 export default props => {
-
+    debugger;
     const rows = props.repertorios.map(repertorio => {
         return (
             <tr key={repertorio.id}>
