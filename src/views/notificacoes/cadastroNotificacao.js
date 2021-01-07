@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Card from '../../components/card';
-import Masks from '../../utils/masks';
 import FormGroup from '../../components/form-group';
 import { withRouter } from 'react-router-dom';
 import { mensagemErro, mensagemSucesso } from '../../components/toastr';
-import SelectMenu from '../../components/select-menu';
 
 import NotificacaoService from '../../app/services/notificacaoService';
 

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Card from '../../components/card';
 import Masks from '../../utils/masks';
 import FormGroup from '../../components/form-group';
-import { withRouter, useParams } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import UsuarioService from '../../app/services/usuarioService';
 import { mensagemErro, mensagemSucesso } from '../../components/toastr';
 import SelectMenu from '../../components/select-menu';
@@ -105,7 +105,7 @@ class CadastroFuncionario extends React.Component {
       id,
       status,
       cgp,
-      cep,
+
       nome,
       dataNascimento,
       cidade,
