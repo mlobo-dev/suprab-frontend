@@ -15,14 +15,12 @@ class CadastroFuncionario extends React.Component {
     id: 0,
     status: '',
     cgp: '',
-    cep: '',
     cpf: '',
     nome: '',
     dataNascimento: '',
     cidade: '',
     uf: '',
     cargo: '',
-    tipoSanguineo: '',
     tituloHonorifico: '',
     corposFilosoficos: [
       {
@@ -69,7 +67,6 @@ class CadastroFuncionario extends React.Component {
       cidade,
       uf,
       cargo,
-      tipoSanguineo,
       tituloHonorifico,
       corposFilosoficos,
     } = this.state;
@@ -78,13 +75,11 @@ class CadastroFuncionario extends React.Component {
       status,
       cgp,
       cpf: Masks.cpfRemove(this.state.cpf),
-      cep: Masks.cepRemove(this.state.cep),
       nome,
       dataNascimento,
       cidade,
       uf,
       cargo,
-      tipoSanguineo,
       tituloHonorifico,
       corposFilosoficos,
     };
@@ -105,11 +100,9 @@ class CadastroFuncionario extends React.Component {
       id,
       status,
       cgp,
-
       nome,
       dataNascimento,
       cidade,
-      tipoSanguineo,
       uf,
       cargo,
       tituloHonorifico,
@@ -121,11 +114,9 @@ class CadastroFuncionario extends React.Component {
       status,
       cgp,
       cpf: Masks.cpfRemove(this.state.cpf),
-      cep: Masks.cepRemove(this.state.cep),
       nome,
       dataNascimento,
       cidade,
-      tipoSanguineo,
       uf,
       cargo,
       tituloHonorifico,
@@ -362,22 +353,7 @@ class CadastroFuncionario extends React.Component {
             </FormGroup>
           </div>
 
-          <div className="col-lg-2">
-            <FormGroup label="Tipo Sanguíneo: *" htmlFor="inputSangue">
-              <input
-                type="text"
-                value={this.state.tipoSanguineo}
-                onChange={this.handleChange}
-                className="form-control"
-                name="tipoSanguineo"
-                id="inputSangue"
-                aria-describedby="tituloHelp"
-                placeholder="Informe o título"
-              />
-            </FormGroup>
-          </div>
-
-          <div className="col-lg-4">
+          <div className="col-lg-6">
             <FormGroup label="Título Honorífico: *" htmlFor="inputTitulo">
               <input
                 type="text"
@@ -422,22 +398,7 @@ class CadastroFuncionario extends React.Component {
             </FormGroup>
           </div>
 
-          <div className="col-lg-2">
-            <FormGroup label="CEP: *" htmlFor="inputCEP">
-              <input
-                type="text"
-                value={Masks.cep(this.state.cep)}
-                onChange={this.handleChange}
-                className="form-control"
-                name="cep"
-                id="inputCEP"
-                aria-describedby="tituloHelp"
-                placeholder="Informe o cep"
-              />
-            </FormGroup>
-          </div>
-
-          <div className="col-lg-4">
+          <div className="col-lg-6">
             <FormGroup label="Cargo: *" htmlFor="inputCargo">
               <input
                 type="text"
@@ -458,7 +419,7 @@ class CadastroFuncionario extends React.Component {
               onClick={this.addCorpoFilosofico}
               className="btn btn-success"
             >
-              <i className="pi pi-plus"></i> Adicionar novo corpo filosofico
+              <i className="pi pi-plus"></i> Adicionar outro corpo filosofico
             </button>
           </div>
         </div>

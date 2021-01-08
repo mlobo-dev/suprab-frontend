@@ -34,14 +34,9 @@ class FuncionarioService extends ApiService {
     if (!funcionario.nome) {
       erros.push('O campo nome é obrigatório');
     }
-    if (!funcionario.tipoSanguineo) {
-      erros.push('O campo tipoSanguineo é obrigatório');
-    }
+
     if (!funcionario.cgp) {
       erros.push('O campo CGP é obrigatório');
-    }
-    if (!funcionario.cep) {
-      erros.push('O campo cep é obrigatório');
     }
 
     if (!funcionario.cpf) {
